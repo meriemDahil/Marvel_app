@@ -1,8 +1,8 @@
-import 'dart:ui';
+
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:marvel/data/user_model.dart';
+import 'package:marvel/data/models/user_model.dart';
 abstract class AuthRepository {
   Future<UserModel?> signUp({required String email, required String password, required String name});
   Future<UserModel?> signIn({required String email, required String password});
@@ -23,7 +23,7 @@ class FirebaseAuthRepository implements AuthRepository {
         password: password,
       );
       await userCredential.user?.updateDisplayName(name);
-      print('${userCredential.user!.uid},${userCredential.user!.email!},$name');
+      
          return UserModel(
             userId: userCredential.user!.uid,
             email: userCredential.user!.email!,
