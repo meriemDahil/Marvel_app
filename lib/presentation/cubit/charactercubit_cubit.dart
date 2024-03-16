@@ -7,13 +7,32 @@ class CharactersCubit extends Cubit<CharactersState> {
   final CharacterRepsitory characterRepsitory;
   
   CharactersCubit({required this.characterRepsitory}) : super(CharactersInitial());
-  
+    final int charactersPerPage = 10;
+  int currentPage = 0;
+  bool hasMoreCharacters = true;
+  List<Character> characters = [];
+
+  Future<void> fetchNextPage() async {
+    if (hasMoreCharacters) {
+      try {
+        final newCharacters = await characterRepsitory.fetchMarvelCharacters(currentPage + 1);
+        currentPage++;
+        if (newCharacters.isEmpty) {
+          hasMoreCharacters = false;
+        }
+        characters.addAll(newCharacters);
+        emit(CharactersLoaded(characters));
+      } catch (e) {
+        emit(CharactersError('Failed to fetch Marvel characters: $e'));
+      }
+    }
+  }
 
   Future<void> fetchMarvelCharacters() async {
     emit(CharactersLoading());
     try{
       
-        final List<Character> characters = await characterRepsitory.fetchMarvelCharacters();
+        final List<Character> characters = await characterRepsitory.fetchMarvelCharacters(0);
          emit(CharactersLoaded(characters));
     }catch(e){
        emit(CharactersError('Failed to fetch Marvel characters: $e'));
@@ -22,6 +41,7 @@ class CharactersCubit extends Cubit<CharactersState> {
     
    
   }
+  
 
   
 }

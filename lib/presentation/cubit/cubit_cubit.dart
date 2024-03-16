@@ -79,6 +79,7 @@ class CubitCubit extends Cubit<AuthenticationStatus> {
       }
     });
   }
+  
  @override
  Future<void> close() {
   _authSubscription.cancel();
