@@ -113,7 +113,7 @@ class _CharactersScreenState extends State<CharactersScreen> {
               },
             );
           } else if (state is CharactersError) {
-            return Center(child: Text('Error: ${state.errorMessage}'));
+            return const Center(child: Text('No data available'));
           } else {
             return Center(child: Text('Unknown state'));
           }

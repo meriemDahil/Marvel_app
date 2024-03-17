@@ -23,6 +23,7 @@ class CharacterRepsitoryImpl extends CharacterRepsitory{
 
     final String apiUrl =
         '$baseUrl?ts=$ts&apikey=$publicKey&hash=$hash';
+        print(apiUrl);
 
     try {
       final Response response = await Dio().get(apiUrl);
@@ -45,7 +46,8 @@ class CharacterRepsitoryImpl extends CharacterRepsitory{
         }
       }
 
-      // Parse comics data
+      // Parse comics 
+      
       final List<Comic> comics = [];
       final List<dynamic> comicsData = characterData['comics']['items'];
       for (var comicData in comicsData) {
