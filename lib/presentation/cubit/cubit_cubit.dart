@@ -24,9 +24,9 @@ class CubitCubit extends Cubit<AuthenticationStatus> {
       }
     });
   }
-  Future<void> signUp({required String email, required String password, required String name}) async {
+  Future<void> signUp({required String email, required String password,}) async {
   try {
-    final userModel = await authRepository.signUp(email: email, password: password, name: name);
+    final userModel = await authRepository.signUp(email: email, password: password, );
     if (userModel != null) {
       emit(AuthenticationStatus.authenticated);
     } else {

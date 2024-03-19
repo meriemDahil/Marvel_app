@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marvel/presentation/cubit/cubit_cubit.dart';
 import 'package:marvel/presentation/screens/sign_up.dart';
 import 'package:marvel/presentation/widgets/custom_text_field.dart';
+import 'package:marvel/presentation/widgets/elevated_botton.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -48,15 +50,15 @@ class _SignInState extends State<SignIn> {
                     child: Text('Sign up here',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18,decoration: TextDecoration.underline,decorationColor: Colors.white),))
                 ],
               ),
-              ElevatedButton(
-                    onPressed: () {
-                      // Call signIn method of AuthenticationCubit to handle authentication
-                      context.read<CubitCubit>().signIn(
-                            email: _emailController.text, // Get email from TextField
-                            password: _passwordController.text, // Get password from TextField
+              GestureDetector(
+                    onTap: () {
+                     
+                      context.read<CubitCubit>().signUp(
+                            email: _emailController.text, 
+                            password: _passwordController.text, 
                           );
                     },
-                    child: const Text('Sign In'),
+                    child: CustomElevaredButton(),
                   ),
                   ],
                 ),

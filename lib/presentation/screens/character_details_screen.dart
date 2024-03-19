@@ -37,7 +37,7 @@ class _CharacterDetailsScreenState extends State<CharacterDetailsScreen> {
     if (_isFavorite) {
       _prefs.remove(widget.character.id.toString());
     } else {
-      final characterJson = jsonEncode(widget.character.toJson()); 
+      final characterJson = jsonEncode(widget.character.toJson()); // Convert to JSON string
       _prefs.setString(widget.character.id.toString(), characterJson);
     }
     setState(() {
@@ -73,6 +73,8 @@ Future<void> _launchURL(String url) async {
 Future<void> fetchAndLaunchUrl(String url ) async {
   final apiUrl = '$url?ts=1710631708304&apikey=6e145d4e69d4046cbb46449c730a4026&hash=f3adc377172cae4f961a7a8dc577a74a'; // Replace with the actual API URL
   final response = await http.get(Uri.parse(apiUrl));
+  
+
     if (response.statusCode == 200) {
     final jsonData = jsonDecode(response.body);
     final data = jsonData['data'];
@@ -89,6 +91,7 @@ Future<void> fetchAndLaunchUrl(String url ) async {
           break;
         }
       }
+
       if (urlToLaunch != null) {
         _launchURL(urlToLaunch);
       } else {
@@ -116,7 +119,7 @@ Future<void> fetchAndLaunchUrl(String url ) async {
           children: [
             Center(
               child: Container(
-                padding: const EdgeInsets.only(left: 60,right: 60,top: 16,bottom: 16),
+                padding: EdgeInsets.only(left: 60,right: 60,top: 16,bottom: 16),
 
                 child: Image.network(
                   widget.character.imageUrl,
@@ -133,21 +136,22 @@ Future<void> fetchAndLaunchUrl(String url ) async {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     widget.character.name,
-                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   
                 ),
                 Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: ElevatedButton(
+              style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.yellow)),
                 onPressed: _toggleFavorite,
-                child: Text(_isFavorite ? 'Remove from Favorites' : 'Add to Favorites',style: TextStyle(color:  Theme.of(context).primaryColor),),
+                child: Text(_isFavorite ? 'Remove from Favorites' : 'Add to Favorites',style: TextStyle(color:  Colors.black),),
               ),
             ),
               ],
             ),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Text(
                 'Comics:',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -161,15 +165,19 @@ Future<void> fetchAndLaunchUrl(String url ) async {
                 return ListTile(
                   title: Text(comic.title),
                   trailing: IconButton(
-                    icon: const Icon(Icons.open_in_browser),
+                    icon: Icon(Icons.open_in_browser),
                     onPressed: () async {
                       print(comic.url);
-                           fetchAndLaunchUrl(comic.url);       
+                     
+                         
+                           fetchAndLaunchUrl(comic.url);
+                        
                     },
                   ),
                 );
               },
-            ), 
+            ),
+            
           ],
         ),
       ),

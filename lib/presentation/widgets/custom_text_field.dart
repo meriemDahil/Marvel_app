@@ -23,6 +23,7 @@ class CustomTextField extends StatelessWidget {
       //color: const Color.fromARGB(255, 238, 238, 238),
       child: TextFormField(
         controller: controller, 
+        style: TextStyle(color: Colors.white),
         validator: (value) {
           if (submitted && (value == null || value.isEmpty)) {
             return '$hintText is required';
@@ -31,6 +32,7 @@ class CustomTextField extends StatelessWidget {
         },
         decoration: InputDecoration(
           hintText: hintText,
+        
           label: Text(label,style: TextStyle(color: Colors.white,letterSpacing: 0.8,fontSize: 20),),
           floatingLabelBehavior: FloatingLabelBehavior.always,
           border: OutlineInputBorder(

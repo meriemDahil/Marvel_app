@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:marvel/presentation/cubit/cubit_cubit.dart';
 import 'package:marvel/presentation/screens/home.dart';
 import 'package:marvel/presentation/screens/welcome_page.dart';
@@ -22,7 +23,9 @@ class _AuthScreenState extends State<AuthScreen> {
       builder: (context, state) {
         switch (state) {
           case AuthenticationStatus.initial :
-            return CircularProgressIndicator(); // Show loading indicator
+            return SpinKitRotatingCircle(
+                  color: Colors.red,
+                  size: 50.0); 
           case AuthenticationStatus.authenticated:
             return NavBar(); // Navigate to Home screen
           case AuthenticationStatus.unauthenticated:

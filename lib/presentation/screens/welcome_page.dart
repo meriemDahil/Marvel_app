@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marvel/presentation/cubit/theme_cubit.dart';
 import 'package:marvel/presentation/screens/sign_in.dart';
+import 'package:marvel/presentation/screens/sign_up.dart';
 
 /*
 
@@ -60,7 +63,19 @@ class _WelcomePageState extends State<WelcomePage> {
  
   @override
   Widget build(BuildContext context) {
+     final themeCubit = BlocProvider.of<ThemeCubit>(context);
     return Scaffold(
+      //  appBar: AppBar(
+      //  backgroundColor: Colors.black,
+      //   actions: [
+      //     IconButton(
+      //       onPressed: () {
+      //         themeCubit.toggleTheme();
+      //       },
+      //       icon: Icon(Icons.dark_mode), 
+      //     ),
+      //   ],
+      // ),
       backgroundColor: Colors.black,
        body: SingleChildScrollView(
          child: Column(
@@ -74,11 +89,8 @@ class _WelcomePageState extends State<WelcomePage> {
                 ),
               ),
               ),
-              const SignIn(),
-             
-               
-              
-         
+              const SignUp(),
+
            ],
          ),
        ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marvel/presentation/cubit/cubit_cubit.dart';
 import 'package:marvel/presentation/screens/favorite.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -23,15 +25,15 @@ class CustomDrawer extends StatelessWidget {
               ),
             ),
           ),
-          ListTile(
-            title: Text('Go To Favorite'),
-            onTap: (){
-              Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) =>  FavoriteScreen()),
-            );
-            },
-          ),
+          // ListTile(
+          //   title: Text('Go To Favorite'),
+          //   onTap: (){
+          //     Navigator.push(
+          //     context,
+          //     MaterialPageRoute(builder: (context) =>  FavoriteScreen()),
+          //   );
+          //   },
+          // ),
           ListTile(
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -40,9 +42,11 @@ class CustomDrawer extends StatelessWidget {
                 Icon(Icons.logout)
               ],
             ),
-            onTap: (){},
+            onTap: (){
+               context.read<CubitCubit>().signOut();
+            },
           ),
-          // Add more list tiles for other options as needed
+          
         ],
       ),
     );

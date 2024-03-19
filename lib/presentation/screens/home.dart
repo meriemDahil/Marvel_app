@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:marvel/presentation/cubit/charactercubit_cubit.dart';
 import 'package:marvel/presentation/cubit/charactercubit_state.dart';
 import 'package:marvel/presentation/cubit/theme_cubit.dart';
@@ -73,7 +74,9 @@ class _CharactersScreenState extends State<CharactersScreen> {
             builder: (context, state) {
               if (state is CharactersLoading) {
                 return const SliverToBoxAdapter(
-                  child: Center(child: CircularProgressIndicator()));
+                  child: Center(child: SpinKitRotatingCircle(
+                    color: Colors.red,
+                    size: 50.0,)));
               } else if (state is CharactersLoaded) {
                 final characters = _showFullList
                     ? state.characters
