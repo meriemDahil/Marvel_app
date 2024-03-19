@@ -42,13 +42,7 @@ class _SignUpState extends State<SignUp> {
                       CustomTextField(hintText: 'password', label: 'password', submitted: true,controller: _passwordController,),
                       SizedBox(height: MediaQuery.of(context).size.height/40,),
                       
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('I already have an account?  ',style: TextStyle(color: Colors.white,fontSize: 18),),
-                    Text('Sign in here',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18,decoration: TextDecoration.underline,decorationColor: Colors.white),)
-                  ],
-                ),
+               
                 ElevatedButton(
                       onPressed: () {
                       
