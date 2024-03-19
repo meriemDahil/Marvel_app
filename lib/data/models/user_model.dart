@@ -15,7 +15,7 @@ class UserModel extends Equatable {
   });
 
   factory UserModel.fromFirebase(UserCredential userCredential) {
-    // Extract user data from the Firebase UserCredential object
+   
     final firebaseUser = userCredential.user;
     return UserModel(
       userId: firebaseUser!.uid,

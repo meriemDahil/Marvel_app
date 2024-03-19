@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marvel/presentation/cubit/cubit_cubit.dart';
 import 'package:marvel/presentation/screens/home.dart';
 import 'package:marvel/presentation/screens/welcome_page.dart';
+import 'package:marvel/presentation/widgets/nav_bar.dart';
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
 
@@ -23,11 +24,11 @@ class _AuthScreenState extends State<AuthScreen> {
           case AuthenticationStatus.initial :
             return CircularProgressIndicator(); // Show loading indicator
           case AuthenticationStatus.authenticated:
-            return CharactersScreen(); // Navigate to Home screen
+            return NavBar(); // Navigate to Home screen
           case AuthenticationStatus.unauthenticated:
             return WelcomePage(); // Navigate to WelcomePage screen
           default:
-            return Container(); // Handle other states if needed
+            return Container(); 
         }
       },
     );

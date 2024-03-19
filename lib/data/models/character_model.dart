@@ -25,7 +25,7 @@ class Character {
     };
   }
    factory Character.fromJson(Map<String, dynamic> json) {
-    // Deserialize a Character object from a JSON map
+    
     return Character(
       id: json['id'],
       name: json['name'],

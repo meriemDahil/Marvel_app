@@ -1,40 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:marvel/data/models/character_model.dart';
+import 'package:marvel/data/repository/local/favorite_local.dart';
 import 'package:marvel/presentation/screens/character_details_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert'; // Import dart:convert for jsonDecode
+
 
 class FavoriteScreen extends StatefulWidget {
   @override
   _FavoriteScreenState createState() => _FavoriteScreenState();
 }
-
 class _FavoriteScreenState extends State<FavoriteScreen> {
   late SharedPreferences _prefs;
+  late FavoriteCharactersRepository _repository;
   List<Character> _favoriteCharacters = [];
 
   @override
   void initState() {
     super.initState();
-    _initializeSharedPreferences();
+    _initializeSharedPreferences().then((_) {
+      _repository = FavoriteCharactersRepository(_prefs);
+      _loadFavoriteCharacters();
+    });
   }
 
   Future<void> _initializeSharedPreferences() async {
     _prefs = await SharedPreferences.getInstance();
-    _loadFavoriteCharacters();
   }
 
   Future<void> _loadFavoriteCharacters() async {
-    List<Character> favoriteCharacters = [];
-    _prefs.getKeys().forEach((key) {
-      final characterJson = _prefs.getString(key);
-      if (characterJson != null) {
-        final characterMap = jsonDecode(characterJson);
-        final character = Character.fromJson(characterMap);
-        favoriteCharacters.add(character);
-      }
-    });
-
+    final favoriteCharacters = await _repository.loadFavoriteCharacters();
     setState(() {
       _favoriteCharacters = favoriteCharacters;
     });

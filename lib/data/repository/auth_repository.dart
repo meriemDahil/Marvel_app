@@ -7,8 +7,7 @@ abstract class AuthRepository {
   Future<UserModel?> signUp({required String email, required String password, required String name});
   Future<UserModel?> signIn({required String email, required String password});
   Future<void> signOut();
-  Future<void> resetPassword({required String email});
-  Future<UserModel?> getCurrentUser();
+
   
 }
 
@@ -58,15 +57,5 @@ class FirebaseAuthRepository implements AuthRepository {
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
   }
-    @override
-  Future<UserModel?> getCurrentUser() {
-    // TODO: implement getCurrentUser
-    throw UnimplementedError();
-  }
   
-  @override
-  Future<void> resetPassword({required String email}) {
-    // TODO: implement resetPassword
-    throw UnimplementedError();
-  }
 }

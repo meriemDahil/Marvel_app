@@ -46,14 +46,16 @@ class CharacterRepsitoryImpl extends CharacterRepsitory{
         }
       }
 
-      // Parse comics 
+  
       
       final List<Comic> comics = [];
       final List<dynamic> comicsData = characterData['comics']['items'];
       for (var comicData in comicsData) {
         final String comicTitle = comicData['name'];
         final String comicUrl = comicData['resourceURI'];
-        comics.add(Comic(title: comicTitle, url: comicUrl));
+        
+         final List<Map<String, String>> comicUrls = List<Map<String, String>>.from(comicData['urls'] ?? []);
+         comics.add(Comic(title: comicTitle, url: comicUrl, urls: comicUrls));
       }
 
       final character = Character(id: id, name: name, imageUrl: imageUrl, wikiUrl: wikiUrl, comics: comics);

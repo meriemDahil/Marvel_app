@@ -9,6 +9,7 @@ import 'package:marvel/data/repository/local/notification.dart';
 import 'package:marvel/firebase_options.dart';
 import 'package:marvel/presentation/cubit/charactercubit_cubit.dart';
 import 'package:marvel/presentation/cubit/cubit_cubit.dart';
+import 'package:marvel/presentation/cubit/theme_cubit.dart';
 import 'package:marvel/presentation/dependency_injection.dart';
 
 void main() async {
@@ -25,7 +26,9 @@ void main() async {
       BlocProvider(
         create: (context) => CharactersCubit(characterRepsitory: CharacterRepsitoryImpl()),
       ),
+         BlocProvider<ThemeCubit>(create: (context) => ThemeCubit()),
     ],
+    
     child: const MyApp(),
   ));
 }
@@ -36,10 +39,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
-      title: 'Flutter Demo',
-      home: AuthScreen(),
-      debugShowCheckedModeBanner: false,
+    return  BlocBuilder<ThemeCubit, ThemeModeType>(
+      builder: (context, state) {
+         final themeMode = state == ThemeModeType.light ? ThemeMode.light : ThemeMode.dark;
+        return GetMaterialApp(
+          title: 'Flutter Demo',
+          home: AuthScreen(),
+          debugShowCheckedModeBanner: false,
+          theme: ThemeCubit.lightTheme,
+          darkTheme: ThemeCubit.darkTheme,
+          themeMode: themeMode 
+        );
+      },
     );
   }
 }
